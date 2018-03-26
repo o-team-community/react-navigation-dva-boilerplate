@@ -1,0 +1,47 @@
+{
+	"name": "ReactNativeOTeamCommunityBoilerPlate",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest",
+		"prettier": "prettier --write --single-quote --no-semi --trailing-comma es5 --print-width 100 --tab-width 4 --use-tabs \"src/**/*.js\"",
+		"lint": "eslint src",
+		"format": "yarn prettier",
+		"precommit": "yarn format && yarn lint --fix"
+	},
+	"dependencies": {
+		"dva-core": "^1.1.0",
+		"react": "^16.2.0",
+		"react-native": "0.53.0",
+		"react-native-keyboard-aware-scroll-view": "^0.5.0",
+		"react-native-linear-gradient": "^2.4.0",
+		"react-navigation": "^1.5.8",
+		"react-navigation-redux-helpers": "^1.0.3",
+		"react-redux": "^5.0.7",
+		"redux": "^3.7.2"
+	},
+	"devDependencies": {
+		"babel-core": "^6.26.0",
+		"babel-eslint": "^8.2.2",
+		"babel-jest": "22.4.3",
+		"babel-plugin-import": "^1.6.7",
+		"babel-plugin-transform-decorators-legacy": "^1.3.4",
+		"babel-preset-react-native": "4.0.0",
+		"eslint": "^4.19.1",
+		"eslint-config-airbnb": "^16.1.0",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-plugin-babel": "^4.1.2",
+		"eslint-plugin-import": "^2.9.0",
+		"eslint-plugin-jsx-a11y": "^6.0.3",
+		"eslint-plugin-prettier": "^2.6.0",
+		"eslint-plugin-react": "^7.7.0",
+		"husky": "^0.14.3",
+		"jest": "22.4.3",
+		"prettier": "^1.11.1",
+		"react-test-renderer": "^16.2.0"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
+}

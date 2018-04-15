@@ -29,6 +29,8 @@
 		"react/jsx-filename-extension": "off",
 		"react/prop-types": "off",
 		"react/jsx-curly-brace-presence": ["warn", { "props": "always", "children": "never" }],
-		"semi": ["error", "never"]
+		"semi": ["error", "never"],
+		"func-names": "off",
+		"linebreak-style": "off"
 	}
 }

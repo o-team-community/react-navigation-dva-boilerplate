@@ -1,6 +1,14 @@
 import React from 'react'
-import { Keyboard, Platform, ScrollView, TouchableWithoutFeedback, View } from 'react-native'
-import { CustomStatusBar } from '../'
+import {
+	Keyboard,
+	Platform,
+	ScrollView,
+	TouchableWithoutFeedback,
+	View,
+	SafeAreaView,
+} from 'react-native'
+import { CustomStatusBar } from './'
+import { computePixelRatio } from './DeviceRatio'
 
 export default class CustomLayout extends React.PureComponent {
 	render() {
@@ -8,37 +16,53 @@ export default class CustomLayout extends React.PureComponent {
 
 		if (this.props.winged) {
 			return (
-				<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-					<View style={[{ backgroundColor: 'white' }, this.props.style]}>
-						<View style={{ flex: 1, marginHorizontal: 8 }}>
-							<CustomStatusBar hideStatusBar={hideStatusBar} />
-							{this.props.children}
+				<SafeAreaView style={{ flex: 1 }}>
+					<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+						<View style={{ flex: 1, backgroundColor: 'white' }}>
+							<View style={{ flex: 1, marginHorizontal: computePixelRatio(8) }}>
+								<CustomStatusBar hideStatusBar={hideStatusBar} />
+								{this.props.children}
+							</View>
 						</View>
-					</View>
-				</TouchableWithoutFeedback>
+					</TouchableWithoutFeedback>
+				</SafeAreaView>
 			)
 		} else if (this.props.scrollableWinged) {
 			return (
-				<ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-					<View style={{ flex: 1, marginHorizontal: 8 }}>
-						<CustomStatusBar hideStatusBar={hideStatusBar} />
-						{this.props.children}
-					</View>
-				</ScrollView>
+				<SafeAreaView style={{ flex: 1 }}>
+					<ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+						<View style={{ flex: 1, marginHorizontal: computePixelRatio(8) }}>
+							<CustomStatusBar hideStatusBar={hideStatusBar} />
+							{this.props.children}
+						</View>
+					</ScrollView>
+				</SafeAreaView>
 			)
 		} else if (this.props.scrollable) {
 			return (
-				<ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+				<SafeAreaView style={{ flex: 1 }}>
+					<ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+						<CustomStatusBar hideStatusBar={hideStatusBar} />
+						{this.props.children}
+					</ScrollView>
+				</SafeAreaView>
+			)
+		} else if (this.props.noSafeArea) {
+			return (
+				<View style={{ flex: 1, backgroundColor: 'white' }}>
 					<CustomStatusBar hideStatusBar={hideStatusBar} />
 					{this.props.children}
-				</ScrollView>
+				</View>
 			)
 		}
+
 		return (
-			<View style={[{ backgroundColor: 'white' }, this.props.style]}>
-				<CustomStatusBar hideStatusBar={hideStatusBar} />
-				{this.props.children}
-			</View>
+			<SafeAreaView style={{ flex: 1 }}>
+				<View style={{ flex: 1, backgroundColor: 'white' }}>
+					<CustomStatusBar hideStatusBar={hideStatusBar} />
+					{this.props.children}
+				</View>
+			</SafeAreaView>
 		)
 	}
 }

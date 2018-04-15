@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar } from 'react-native'
 
-export default class HISD3StatusBar extends React.PureComponent {
+export default class CustomStatusBar extends React.PureComponent {
 	render() {
 		return (
 			<StatusBar

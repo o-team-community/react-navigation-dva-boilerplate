@@ -6,10 +6,11 @@ import Router from './Router'
 
 import authModel from './models/auth'
 import routerModel from './models/router'
+import drawerModel from './models/drawer'
 
 const app = dva({
 	initialState: {},
-	models: [authModel, routerModel],
+	models: [authModel, routerModel, drawerModel],
 	onAction: createReactNavigationReduxMiddleware('router', state => state.router),
 	onError(error) {
 		console.log('error onError', error)

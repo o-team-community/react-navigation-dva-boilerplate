@@ -14,7 +14,9 @@ export default class CustomFormScrollView extends PureComponent {
 
 		return (
 			<KeyboardAvoidingView {...this.props}>
-				<ScrollView>{this.props.children}</ScrollView>
+				<ScrollView refreshControl={this.props.refreshControl}>
+					{this.props.children}
+				</ScrollView>
 			</KeyboardAvoidingView>
 		)
 	}

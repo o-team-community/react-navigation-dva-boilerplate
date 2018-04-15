@@ -13,8 +13,6 @@ const actions = [
 	NavigationActions.URI,
 ]
 
-/* eslint-disable func-names */
-/* eslint-disable no-unused-vars */
 export default {
 	namespace: 'router',
 	state: {

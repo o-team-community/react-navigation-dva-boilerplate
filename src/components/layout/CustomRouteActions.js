@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
-import { Alert, Text, TouchableOpacity, View } from 'react-native'
-import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
-const backAction = navigation => () => navigation.goBack()
+const backAction = navigation => () => navigation.dispatch(NavigationActions.back())
 
-const navigateTo = (navigation, route) => {
-	navigation.navigate(route)
+const navigateTo = (navigation, route, params = {}) => {
+	navigation.navigate(route, params)
 }
 
 const resetNavigateTo = (navigation, route) => {
@@ -18,36 +15,16 @@ const resetNavigateTo = (navigation, route) => {
 	)
 }
 
-@connect(({ auth }) => ({ auth }))
-class LogoutButton extends Component {
-	onLogout = () => {
-		Alert.alert('Confirmation', 'Please Confirm to Logout', [
-			{
-				text: 'Confirm',
-				onPress: () => {
-					this.props.dispatch({ type: 'auth/logout' })
-
-					this.props.navigation.dispatch(
-						NavigationActions.reset({
-							index: 0,
-							actions: [this.props.navigation.navigate('Auth')],
-						})
-					)
-				},
-			},
-			{ text: 'Cancel', onPress: () => {}, style: 'cancel' },
-		])
-	}
-
-	render() {
-		return (
-			<TouchableOpacity onPress={this.onLogout}>
-				<View style={{ marginHorizontal: 8 }}>
-					<Text style={{ fontSize: 28 }}>Logout</Text>
-				</View>
-			</TouchableOpacity>
-		)
-	}
+const resetNavigateToDashboard = (navigation, route) => {
+	navigation.dispatch(
+		NavigationActions.reset({
+			index: 1,
+			actions: [
+				NavigationActions.navigate({ routeName: 'Dashboard' }),
+				NavigationActions.navigate({ routeName: route }),
+			],
+		})
+	)
 }
 
-export { backAction, navigateTo, resetNavigateTo, LogoutButton }
+export { backAction, navigateTo, resetNavigateTo, resetNavigateToDashboard }

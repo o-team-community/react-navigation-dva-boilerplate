@@ -1,10 +1,15 @@
 import React, { PureComponent } from 'react'
 import { Animated, BackHandler, Easing } from 'react-native'
-import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation'
+import {
+	addNavigationHelpers,
+	NavigationActions,
+	StackNavigator,
+	DrawerNavigator,
+} from 'react-navigation'
 import { createReduxBoundAddListener } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 
-import { Auth, CustomTitleBar, Dashboard } from './components'
+import { Auth, Dashboard, DrawerMenu, CustomTitleBar, DeviceRatio } from './components'
 
 const MainNavigator = StackNavigator(
 	{
@@ -29,11 +34,29 @@ const MainNavigator = StackNavigator(
 	}
 )
 
+const Drawer = DrawerNavigator(
+	{
+		MainNavigator: { screen: MainNavigator },
+	},
+	{
+		contentComponent: DrawerMenu,
+		drawerWidth: DeviceRatio.computeWidthRatio(800),
+		drawerPosition: 'right',
+		transitionConfig: () => ({
+			transitionSpec: {
+				duration: 250,
+				easing: Easing.inOut(Easing.poly(4)),
+				timing: Animated.timing,
+			},
+		}),
+	}
+)
+
 const ModalNavigator = StackNavigator(
 	{
 		Auth: { screen: Auth },
 		Main: {
-			screen: MainNavigator,
+			screen: Drawer,
 		},
 	},
 	{

@@ -6,7 +6,7 @@ export default class CustomStatusBar extends React.PureComponent {
 		return (
 			<StatusBar
 				barStyle={'light-content'}
-				backgroundColor={'#5691c8'}
+				backgroundColor={'#5792ca'}
 				hidden={this.props.hideStatusBar}
 			/>
 		)
